@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  item-db:
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+    restart: always
+
+  item-app:
+    # Gantilah USERNAME dan REPO_NAME dengan informasi akun GitHub Anda
+    image: docker.pkg.github.com/hasanbasri1993/a433-microservices/item-app:v1
+    ports:
+      - "80:8080"
+    depends_on:
+      - item-db
+    restart: always
+
+volumes:
+  app-db:
+
